@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kim-Thank_You | Premium TradingView Indicators</title>
+<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="img/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+<meta name="description" content="Premium TradingView indicators for ICT Smart Money Concepts, Harmonic Patterns, and Chart Analysis. Built for serious traders who demand precision.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Kim-Thank_You | Premium TradingView Indicators">
+<meta property="og:description" content="Trade smarter with ICT, Harmonic Patterns, and Chart Analysis indicators. Built for serious traders.">
+<meta property="og:image" content="img/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Kim-Thank_You | Premium TradingView Indicators">
+<meta name="twitter:description" content="Premium TradingView indicators for ICT, Harmonic Patterns, and Chart Analysis.">
+<meta name="twitter:image" content="img/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;box-sizing:border-box}
+:root{--bg:#050505;--text:#f8fafc;--text2:rgba(248,250,252,0.65);--text3:rgba(248,250,252,0.4);--a1:#B8860B;--a2:#D4A843;--a3:#F2D85E;--a4:#E8C547;--a5:#F5E6A3;--cyan:#FBBF24;--grad:linear-gradient(135deg,#B8860B 0%,#D4A843 50%,#F2D85E 100%);--grad-text:linear-gradient(135deg,#F2D85E 0%,#E8C547 40%,#D4A843 70%,#FBBF24 100%);--glass:rgba(255,255,255,0.02);--gborder:rgba(212,168,67,0.15);--fh:'Outfit',sans-serif;--fb:'Outfit',sans-serif;--fm:'JetBrains Mono',monospace}
+html{scroll-behavior:smooth}
+
+
+body{font-family:var(--fb);background:#050505;color:var(--text);overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased}
+.bg-stars{position:fixed;inset:-20%;width:140%;height:140%;background-image:url('img/bg.png');background-size:cover;background-position:center;z-index:0;pointer-events:none;animation:starDrift 40s ease-in-out infinite;filter:brightness(1.3)}
+@keyframes starDrift{0%{transform:translate(0,0) scale(1.1)}25%{transform:translate(-4%,-3%) scale(1.12)}50%{transform:translate(-2%,-6%) scale(1.15)}75%{transform:translate(2%,-2%) scale(1.1)}100%{transform:translate(0,0) scale(1.1)}}
+
+/* BG */
+.bg-grid{position:fixed;inset:0;background-image:linear-gradient(rgba(212,168,67,0.018) 1px,transparent 1px),linear-gradient(90deg,rgba(212,168,67,0.018) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0}
+
+.orb{position:fixed;border-radius:50%;filter:blur(80px);pointer-events:none;z-index:0;animation:of 8s ease-in-out infinite}
+.orb-1{width:550px;height:550px;background:radial-gradient(circle,rgba(184,134,11,0.14) 0%,transparent 70%);top:-180px;right:-100px}
+.orb-2{width:450px;height:450px;background:radial-gradient(circle,rgba(212,168,67,0.08) 0%,transparent 70%);bottom:25%;left:-150px;animation-delay:3s}
+.orb-3{width:350px;height:350px;background:radial-gradient(circle,rgba(184,134,11,0.06) 0%,transparent 70%);bottom:-80px;right:20%;animation-delay:5s}
+@keyframes of{0%,100%{transform:translateY(0) scale(1)}33%{transform:translateY(-20px) scale(1.05)}66%{transform:translateY(10px) scale(.97)}}
+
+/* NAV */
+.nav{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:1000;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;max-width:1272px;width:calc(100% - 48px);border-radius:8px;background:linear-gradient(180deg,rgba(255,255,255,0.07) 0%,rgba(255,255,255,0.01) 50%,rgba(255,255,255,0.03) 100%);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,0.12);border-top:1px solid rgba(255,255,255,0.1);border-bottom:1px solid rgba(255,255,255,0.05);box-shadow:0 6px 24px rgba(0,0,0,0.12),0 1px 2px rgba(0,0,0,0.1),inset 0 1px 0 rgba(255,255,255,0.2),inset 0 -1px 0 rgba(255,255,255,0.04),inset 0 20px 30px rgba(255,255,255,0.02);transition:all .3s}
+.nav.scrolled{background:linear-gradient(180deg,rgba(255,255,255,0.09) 0%,rgba(255,255,255,0.02) 50%,rgba(255,255,255,0.04) 100%);box-shadow:0 8px 32px rgba(0,0,0,0.15),0 1px 3px rgba(0,0,0,0.1),inset 0 1px 0 rgba(255,255,255,0.25),inset 0 -1px 0 rgba(255,255,255,0.05),inset 0 20px 30px rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.14);border-top:1.5px solid rgba(255,255,255,0.28);border-bottom:1px solid rgba(255,255,255,0.06);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+
+.nav-logo-img{width:36px;height:36px;border-radius:8px;object-fit:cover}
+.nav-logo-text{font-family:var(--fh);font-weight:800;font-size:1.05rem;background:linear-gradient(135deg,#FFF8DC 0%,#F5E6A3 60%,#FBBF24 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nav-links{display:flex;align-items:center;gap:32px;list-style:none}
+.nav-links a{color:rgba(248,250,252,0.7);text-decoration:none;font-size:.9rem;font-weight:500;transition:color .2s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:linear-gradient(90deg,#D4A843,#F2D85E);transition:width .3s}
+.nav-links a:hover{color:#f8fafc}
+.nav-links a:hover::after{width:100%}
+.nav-cta{padding:10px 22px!important;background:var(--grad)!important;color:#fff!important;border-radius:10px;font-weight:600!important;font-size:.85rem!important;box-shadow:0 0 20px rgba(184,134,11,0.35);-webkit-text-fill-color:#fff!important;transition:all .3s!important}
+.nav-cta:hover{box-shadow:0 0 30px rgba(184,134,11,0.55);transform:translateY(-1px)}
+.nav-cta::after{display:none!important}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:5px;background:none;border:none}
+.hamburger span{width:22px;height:2px;background:var(--text);display:block}
+.mmenu{display:none;position:fixed;top:72px;left:0;right:0;background:rgba(5,5,5,0.98);backdrop-filter:blur(20px);padding:20px 24px;border-bottom:1px solid rgba(212,168,67,0.1);z-index:999}
+.mmenu.open{display:block}
+.mmenu a{display:block;padding:14px 0;color:var(--text2);text-decoration:none;font-size:1rem;font-weight:500;border-bottom:1px solid rgba(255,255,255,0.04)}
+.mmenu a:last-child{border:none}
+
+/* COMMON */
+section{position:relative;z-index:1}
+.container{max-width:1320px;margin:0 auto;padding:0 24px}
+.gdiv{height:1px;background:linear-gradient(90deg,transparent 0%,rgba(212,168,67,0.15) 25%,rgba(242,216,94,0.3) 50%,rgba(212,168,67,0.15) 75%,transparent 100%)}
+.btn-p{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;background:var(--grad);color:#fff;border:none;border-radius:12px;font-size:.95rem;font-weight:600;font-family:var(--fb);cursor:pointer;text-decoration:none;transition:all .3s;box-shadow:0 0 30px rgba(184,134,11,0.4),0 0 60px rgba(184,134,11,0.15);position:relative;overflow:hidden}
+.btn-p::after{content:'';position:absolute;inset:-2px;border-radius:14px;background:var(--grad);opacity:0;filter:blur(16px);z-index:-1;animation:btnPulse 3s ease-in-out infinite}
+@keyframes btnPulse{0%,100%{opacity:.25}50%{opacity:.55}}
+.hero .btn-p{box-shadow:0 0 40px rgba(184,134,11,0.5),0 0 80px rgba(184,134,11,0.2);font-size:1rem;padding:15px 36px}
+.btn-p:hover{box-shadow:0 0 40px rgba(184,134,11,0.6),0 0 80px rgba(184,134,11,0.25);transform:translateY(-2px);filter:brightness(1.1)}
+
+.btn-s:hover{border-color:rgba(212,168,67,0.9);background:rgba(212,168,67,0.08);box-shadow:0 0 20px rgba(212,168,67,0.2);color:#fff}
+
+/* HERO — DeepCharts centered layout */
+.hero{padding:140px 0 60px;position:relative;overflow:visible;text-align:center}
+.hero-glow{position:absolute;width:1000px;height:1000px;background:radial-gradient(circle,rgba(184,134,11,0.18) 0%,rgba(184,134,11,0.06) 40%,transparent 70%);top:30%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
+.hero .container{display:flex;flex-direction:column;align-items:center}
+.hero-content{position:relative;z-index:2;max-width:800px}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:7px 18px;border-radius:100px;background:rgba(184,134,11,0.08);border:1px solid rgba(212,168,67,0.35);font-size:.78rem;color:#F5E6A3;margin-bottom:28px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;box-shadow:0 0 20px rgba(184,134,11,0.1);backdrop-filter:blur(8px)}
+.hero-badge .dot{width:6px;height:6px;background:#F2D85E;border-radius:50%;box-shadow:0 0 8px rgba(242,216,94,0.8);animation:pg 2s ease-in-out infinite}
+@keyframes pg{0%,100%{opacity:.5}50%{opacity:1}}
+.hero h1{font-family:var(--fh);font-size:clamp(2.8rem,6vw,4.8rem);font-weight:800;line-height:1.05;letter-spacing:-.03em;margin-bottom:24px}
+.hero h1 .gt{background:var(--grad-text);background-size:200% 100%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 3s ease-in-out infinite}
+@keyframes shimmer{0%,100%{background-position:0% center}50%{background-position:100% center}}
+.hero-desc{font-size:clamp(1rem,1.5vw,1.15rem);color:var(--text2);line-height:1.75;margin-bottom:36px;max-width:540px;margin-left:auto;margin-right:auto}
+.hero-btns{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:48px;justify-content:center}
+
+/* Hero image slider */
+.hero-visual{position:relative;z-index:2;width:100%;}
+.hero-img-frame{width:100%;border-radius:16px;position:relative;background:linear-gradient(180deg,rgba(18,18,18,1) 0%,rgba(8,8,8,1) 100%);overflow:hidden;transition:box-shadow .4s ease;border:1.5px solid rgba(212,168,67,0.25);box-shadow:0 0 20px rgba(184,134,11,0.08),0 8px 24px rgba(0,0,0,0.4),0 32px 64px rgba(0,0,0,0.25),0 0 0 3px rgba(20,18,14,0.95),0 0 0 4.5px rgba(212,168,67,0.12),0 0 0 7px rgba(15,14,10,0.9),0 0 0 8.5px rgba(212,168,67,0.06),0 0 0 12px rgba(10,10,8,0.8),0 0 30px rgba(184,134,11,0.1),0 2px 4px rgba(0,0,0,0.6),0 8px 16px rgba(0,0,0,0.5),0 20px 40px rgba(0,0,0,0.4),0 40px 80px rgba(0,0,0,0.35),0 60px 120px rgba(0,0,0,0.2),inset 0 1px 0 rgba(255,248,220,0.18),inset 0 2px 4px rgba(255,248,220,0.04),inset 0 -1px 0 rgba(212,168,67,0.12),inset 0 -3px 6px rgba(0,0,0,0.2),inset 1px 0 0 rgba(242,216,94,0.07),inset -1px 0 0 rgba(242,216,94,0.07)}
+.hero-img-frame>*{overflow:hidden;border-radius:inherit}
+.hero-visual::after{content:'';position:absolute;bottom:-20px;left:12%;right:12%;height:60px;background:radial-gradient(ellipse at center,rgba(212,168,67,0.06) 0%,transparent 55%);filter:blur(16px);pointer-events:none;z-index:1}
+.hero-img-frame>.hero-titlebar{border-top:1px solid rgba(242,216,94,0.06)}
+.hero-titlebar{display:flex;align-items:center;padding:6px 14px;background:linear-gradient(180deg,rgba(255,255,255,0.04) 0%,rgba(255,255,255,0.01) 100%);border-bottom:1px solid rgba(255,255,255,0.04);position:relative;z-index:5;border-radius:14px 14px 0 0}
+.hero-dots{display:flex;gap:6px}
+.hero-dots span{width:8px;height:8px;border-radius:50%}
+.hero-dots .rd{background:#ff5f57}.hero-dots .yw{background:#febc2e}.hero-dots .gn{background:#28c840}
+
+
+.hero-img-frame:hover{border-color:rgba(212,168,67,0.35);box-shadow:0 0 28px rgba(184,134,11,0.12),0 12px 32px rgba(0,0,0,0.4),0 40px 80px rgba(0,0,0,0.2)}
+.hero-slider{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;border-radius:0 0 14px 14px;background:#080808}
+.hero-slide{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity .8s ease;border-radius:0 0 14px 14px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.hero-slide.active{opacity:1}
+.hero-slide img{width:100%;height:100%;object-fit:cover;border-radius:0 0 14px 14px}
+
+
+
+
+.hero-img-glow{position:absolute;inset:0;pointer-events:none;background:linear-gradient(135deg,rgba(184,134,11,0.04) 0%,transparent 50%,rgba(242,216,94,0.04) 100%);border-radius:16px;z-index:4}
+
+
+/* FEATURES — Tab + Panel */
+.features{padding:120px 0}
+.sec-hd{text-align:center;margin-bottom:56px}
+.sec-badge{display:inline-flex;align-items:center;padding:6px 16px;border-radius:100px;background:rgba(184,134,11,0.1);border:1px solid rgba(212,168,67,0.25);font-size:.78rem;font-weight:500;color:#E8C547;letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px}
+.sec-title{font-family:var(--fh);font-size:clamp(2rem,3.5vw,3rem);font-weight:800;letter-spacing:-.03em;margin-bottom:16px}
+.sec-title .gt{background:linear-gradient(135deg,#E8C547,#F5E6A3);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sec-sub{font-size:1.05rem;color:var(--text2);max-width:520px;margin:0 auto;line-height:1.75}
+.ftabs{display:flex;gap:6px;margin-bottom:32px;padding:5px;background:linear-gradient(180deg,rgba(255,255,255,0.05) 0%,rgba(255,255,255,0.01) 100%);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,0.1);border-top:1.5px solid rgba(255,255,255,0.18);box-shadow:0 4px 20px rgba(0,0,0,0.1),inset 0 1px 0 rgba(255,255,255,0.12),inset 0 -1px 0 rgba(255,255,255,0.03);border-radius:10px}
+.ftab{flex:1;display:flex;align-items:center;gap:12px;padding:16px 20px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:7px;position:relative;overflow:hidden;cursor:pointer;transition:all .3s;color:var(--text2)}
+
+.ftab.active{background:linear-gradient(180deg,rgba(255,255,255,0.09) 0%,rgba(255,255,255,0.02) 100%);border:1px solid rgba(255,255,255,0.15);border-top-color:rgba(255,255,255,0.22);color:var(--text);box-shadow:0 2px 16px rgba(0,0,0,0.12),0 0 12px rgba(255,255,255,0.03),inset 0 1px 0 rgba(255,255,255,0.18)}
+.ftab svg{flex-shrink:0;opacity:.5;transition:opacity .3s}
+.ftab.active svg{opacity:1;stroke:var(--a5)}
+.ftab-name{font-family:var(--fh);font-size:.9rem;font-weight:700;white-space:nowrap}
+.fpanels{position:relative;min-height:420px;background:rgba(255,255,255,0.01);border:1px solid rgba(212,168,67,0.08);border-radius:16px;overflow:hidden}
+.fpanel{display:none;grid-template-columns:1fr 1.4fr;gap:36px;align-items:center;animation:fpIn .5s ease;padding:20px 24px}
+.fpanel.active{display:grid}
+@keyframes fpIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.fpanel-info{display:flex;flex-direction:column}
+.fpanel-tag{font-family:var(--fm);font-size:.7rem;color:var(--a4);letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+.fpanel-title{font-family:var(--fh);font-size:clamp(1.5rem,2.5vw,2rem);font-weight:800;letter-spacing:-.02em;margin-bottom:16px}
+.fpanel-desc{font-size:.92rem;color:var(--text2);line-height:1.75;margin-bottom:24px}
+.fpanel-feats{display:flex;flex-direction:column;gap:10px}
+.fpanel-feat{font-size:.85rem;color:rgba(248,250,252,0.75);display:flex;align-items:center;gap:10px;opacity:0;transform:translateX(-10px)}
+.fpanel.active .fpanel-feat{animation:featIn .4s ease forwards}
+.fpanel.active .fpanel-feat:nth-child(1){animation-delay:.05s}
+.fpanel.active .fpanel-feat:nth-child(2){animation-delay:.1s}
+.fpanel.active .fpanel-feat:nth-child(3){animation-delay:.15s}
+.fpanel.active .fpanel-feat:nth-child(4){animation-delay:.2s}
+.fpanel.active .fpanel-feat:nth-child(5){animation-delay:.25s}
+.fpanel.active .fpanel-feat:nth-child(6){animation-delay:.3s}
+.fpanel.active .fpanel-feat:nth-child(7){animation-delay:.35s}
+.fpanel.active .fpanel-feat:nth-child(8){animation-delay:.4s}
+.fpanel.active .fpanel-feat:nth-child(9){animation-delay:.45s}
+.fpanel.active .fpanel-feat:nth-child(10){animation-delay:.5s}
+.fpanel.active .fpanel-feat:nth-child(11){animation-delay:.55s}
+.fpanel-feat:nth-child(8){animation-delay:.4s}
+.fpanel-feat:nth-child(9){animation-delay:.45s}
+.fpanel-feat:nth-child(10){animation-delay:.5s}
+.fpanel-feat:nth-child(11){animation-delay:.55s}
+@keyframes featIn{to{opacity:1;transform:translateX(0)}}
+.ff-dot{width:6px;height:6px;border-radius:50%;background:var(--grad);flex-shrink:0;box-shadow:0 0 8px rgba(184,134,11,0.7)}
+
+.fpanel-info{animation:featSlideUp .5s ease both}
+@keyframes featSlideUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.fpanel-preview{border-radius:16px;overflow:hidden;border:1.5px solid rgba(255,255,255,0.15);border-top:2px solid rgba(255,255,255,0.25);box-shadow:0 0 24px rgba(184,134,11,0.06),0 16px 40px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.12),inset 0 -1px 0 rgba(255,255,255,0.04);transition:all .4s cubic-bezier(.4,0,.2,1)}
+.fpanel-preview:hover{transform:translateY(-4px);box-shadow:0 0 40px rgba(255,255,255,0.06),0 20px 50px rgba(0,0,0,0.4),inset 0 1px 0 rgba(255,255,255,0.15);border-color:rgba(255,255,255,0.2);border-top-color:rgba(255,255,255,0.28)}
+.fpanel-preview:hover .fpanel-img{transform:none}
+.fpanel-img{transition:transform .6s cubic-bezier(.4,0,.2,1)}
+#fp0 
+.fpanel-info{animation:featSlideUp .5s ease both}
+@keyframes featSlideUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.fpanel-preview{border-color:rgba(184,134,11,0.2)}
+#fp0 .fpanel-preview:hover{box-shadow:0 0 60px rgba(184,134,11,0.2),0 30px 80px rgba(0,0,0,0.4)}
+#fp1 
+.fpanel-info{animation:featSlideUp .5s ease both}
+@keyframes featSlideUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.fpanel-preview{border-color:rgba(242,216,94,0.2)}
+#fp1 .fpanel-preview:hover{box-shadow:0 0 60px rgba(242,216,94,0.2),0 30px 80px rgba(0,0,0,0.4)}
+#fp2 
+.fpanel-info{animation:featSlideUp .5s ease both}
+@keyframes featSlideUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.fpanel-preview{border-color:rgba(232,197,71,0.2)}
+#fp2 .fpanel-preview:hover{box-shadow:0 0 60px rgba(232,197,71,0.2),0 30px 80px rgba(0,0,0,0.4)}
+.fpanel-img{width:100%;aspect-ratio:16/10;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:16px}
+
+/* PRICING */
+.pricing{padding:120px 0;position:relative}
+.pricing-glow{position:absolute;width:700px;height:400px;background:radial-gradient(ellipse,rgba(184,134,11,0.1) 0%,transparent 70%);top:0;left:50%;transform:translateX(-50%);filter:blur(60px);pointer-events:none}
+.guarantee{display:flex;justify-content:center;margin-bottom:48px}
+.guarantee-badge{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:100px;background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.2);font-size:.85rem;color:var(--cyan);font-weight:500}
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;position:relative;z-index:1}
+.pcard{background:var(--glass);border:1px solid rgba(255,255,255,0.15);border-radius:16px;padding:28px 28px;display:flex;flex-direction:column;transition:all .4s cubic-bezier(.4,0,.2,1);backdrop-filter:blur(12px);position:relative;overflow:hidden}
+.pcard:hover{background:rgba(212,168,67,0.05);border-color:rgba(212,168,67,0.35);transform:translateY(-8px) scale(1.02);box-shadow:0 20px 40px rgba(0,0,0,0.4),0 0 30px rgba(212,168,67,0.1);transition:all .4s cubic-bezier(.4,0,.2,1)}
+.glow-spot{position:absolute;width:250px;height:250px;border-radius:50%;background:radial-gradient(circle,rgba(184,134,11,0.15) 0%,transparent 70%);pointer-events:none;opacity:0;transition:opacity .4s;transform:translate(-50%,-50%)}
+.pcard:hover .glow-spot{opacity:1}
+/* Popular card spinning border */
+.pcard.pop{background:none;border:none;border-radius:16px;position:relative;overflow:hidden}
+.pcard.pop::before{content:'';position:absolute;inset:-1.5px;border-radius:17.5px;background:conic-gradient(from var(--angle,0deg),transparent 30%,rgba(242,216,94,0.5) 45%,rgba(212,168,67,0.7) 50%,rgba(242,216,94,0.5) 55%,transparent 70%);animation:borderSpin 5s linear infinite;z-index:-1;pointer-events:none}
+@property --angle{syntax:'<angle>';initial-value:0deg;inherits:false}
+@keyframes borderSpin{to{--angle:360deg}}
+.pcard.pop{padding:1.5px;background:transparent;border:none;box-shadow:0 0 20px rgba(212,168,67,0.1),0 0 40px rgba(184,134,11,0.05);transition:all .4s cubic-bezier(.4,0,.2,1)}.pcard.pop:hover{transform:translateY(-10px) scale(1.02);box-shadow:0 0 30px rgba(212,168,67,0.2),0 0 60px rgba(184,134,11,0.1),0 20px 40px rgba(0,0,0,0.3)}
+.pop-inner{position:relative;z-index:1;border-radius:14px;height:100%;display:flex;flex-direction:column;background:rgba(8,8,8,0.95);padding:28px 28px;overflow:visible}
+
+.pcard-name{font-size:.72rem;font-weight:600;color:rgba(248,250,252,0.55);text-transform:uppercase;letter-spacing:.08em;padding:4px 12px;border-radius:6px;border:1px solid rgba(248,250,252,0.15);display:inline-flex;align-items:center;margin-left:-1px}
+.pcard-badge{padding:4px 12px;border-radius:100px;font-size:.72rem;font-weight:600}
+.pcard-badge.popular{background:transparent;color:#E8C547;border:1px solid rgba(212,168,67,0.4)}
+.pcard-badge.value{background:rgba(212,168,67,0.12);border:1px solid rgba(212,168,67,0.3);color:#F5E6A3}
+.pcard .price{font-family:var(--fh);font-size:3.2rem;font-weight:800;margin:0 0 16px;letter-spacing:-.04em;line-height:1}
+.pcard .price span{font-family:var(--fb);font-size:1.1rem;font-weight:500;color:var(--text2);letter-spacing:.05em;margin-left:2px}
+.pcard.pop .price{background:linear-gradient(135deg,#E8C547,#F5E6A3);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.pcard .pdesc{font-size:.88rem;color:var(--text2);line-height:1.75;margin-bottom:20px}
+
+
+.pfeats{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:28px;flex-grow:1}
+.pfeats li{font-size:.92rem;color:rgba(248,250,252,0.75);display:flex;align-items:center;gap:10px}
+.pcard.pop .pfeats li{color:rgba(248,250,252,0.85)}
+.ck{width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ck svg{width:10px;height:10px}
+.pcard .btn-p{width:100%;justify-content:center;font-size:.95rem;padding:14px 20px}
+.pcard:not(.pop) .btn-p{background:transparent;box-shadow:none;color:rgba(248,250,252,0.8);border:1px solid rgba(248,250,252,0.2)}
+.pcard:not(.pop) .btn-p::after{display:none}
+.pcard:not(.pop) .btn-p:hover{background:rgba(248,250,252,0.08);box-shadow:0 0 16px rgba(255,255,255,0.05);color:rgba(248,250,252,1);border-color:rgba(248,250,252,0.35)}
+
+/* FAQ */
+.faq{padding:120px 0}
+.faq-list{max-width:720px;margin:0 auto}
+.faq-i{border-bottom:1px solid rgba(212,168,67,0.12);transition:all .3s}
+.faq-i:first-child{border-top:1px solid rgba(212,168,67,0.12)}
+.faq-i.active{background:rgba(255,255,255,0.02);border-radius:12px;margin:0 -12px;padding:0 12px}
+
+.faq-q{width:100%;padding:22px 4px;background:none;border:none;color:var(--text);font-size:1rem;font-weight:500;font-family:var(--fb);cursor:pointer;display:flex;align-items:center;justify-content:space-between;text-align:left;gap:16px;transition:color .2s}
+.faq-q:hover{color:#F5E6A3}
+.faq-q .ic{width:28px;height:28px;border-radius:8px;background:rgba(212,168,67,0.08);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .3s;color:var(--a4)}
+.faq-i.active .faq-q .ic{transform:rotate(45deg);background:rgba(212,168,67,0.18)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.4,0,.2,1)}.faq-a-inner{opacity:0;transform:translateY(-4px);transition:opacity .3s .1s,transform .3s .1s}.faq-i.active .faq-a-inner{opacity:1;transform:translateY(0)}
+.faq-a-inner{padding:14px 18px 18px;font-size:.95rem;color:rgba(248,250,252,0.8);line-height:1.75;background:rgba(0,0,0,0.4);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:8px;border:1px solid rgba(255,255,255,0.06);border-left:2px solid rgba(212,168,67,0.35);margin-bottom:8px}
+
+/* FINAL CTA */
+.final-cta{padding:100px 0;position:relative;overflow:hidden;text-align:center}
+.final-cta-bg{position:absolute;inset:0;background:transparent;pointer-events:none}
+.final-cta-glow{display:none}
+.final-cta h2{font-family:var(--fh);font-size:clamp(2rem,4vw,3rem);font-weight:800;margin-bottom:52px;letter-spacing:-.03em}
+.final-cta p{font-size:1.05rem;color:var(--text2);margin-bottom:36px;max-width:480px;margin-left:auto;margin-right:auto}
+/* FOOTER */
+/* COMPARISON TABLE */
+.compare{margin-top:64px;border:1px solid rgba(212,168,67,0.12);border-radius:16px;overflow:hidden;backdrop-filter:blur(8px);background:rgba(255,255,255,0.015)}
+.compare-title{padding:24px 28px;font-family:var(--fh);font-size:1.1rem;font-weight:700;border-bottom:1px solid rgba(212,168,67,0.1)}
+.compare table{width:100%;border-collapse:collapse}
+.compare th,.compare td{padding:14px 20px;text-align:center;font-size:.85rem;border-bottom:1px solid rgba(255,255,255,0.04)}
+.compare th{color:var(--text3);font-weight:600;font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;padding-top:18px}
+.compare th.pop-col{color:var(--a5);background:rgba(184,134,11,0.04)}
+.compare td:first-child{text-align:left;color:var(--text2);font-weight:500}
+.compare td.pop-col{background:rgba(184,134,11,0.04)}
+.compare tr:last-child td,.compare tr:last-child th{border-bottom:none}
+.compare .ck-yes{color:#E8C547;font-size:1rem}
+.compare .ck-no{color:rgba(255,255,255,0.12);font-size:1rem}
+.compare .ck-partial{color:rgba(232,197,71,0.5);font-size:.75rem}
+
+.foot{padding:36px 0 20px;border-top:none;position:relative;background:linear-gradient(180deg,rgba(255,255,255,0.015) 0%,rgba(0,0,0,0.3) 100%)}
+
+
+
+
+.foot-logo-text{font-family:var(--fh);font-weight:800;font-size:1rem;background:linear-gradient(135deg,#FFF8DC,#F5E6A3,#FBBF24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+.fsocials{display:flex;gap:8px;margin-top:16px}
+.fsocials a{width:34px;height:34px;border-radius:8px;border:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;color:var(--text3);text-decoration:none;transition:all .3s}
+.fsocials a:hover{border-color:rgba(212,168,67,0.3);color:var(--text);background:rgba(212,168,67,0.06)}
+
+
+
+.foot-disc{font-size:.65rem;color:rgba(248,250,252,0.4);line-height:1.7;text-align:center;padding:8px 0 0;max-width:720px;margin:0 auto}
+
+
+/* ANIMATIONS */
+.fi{opacity:0;transform:translateY(30px);transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1)}
+.fi.vis{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+
+/* RESPONSIVE */
+@media(max-width:1024px){.nav{padding:0 20px;max-width:calc(100% - 48px)}.hero h1{font-size:clamp(2.2rem,4vw,3.2rem)}.pgrid{gap:16px}.pcard{padding:32px 22px}.pop-inner{padding:32px 22px}}
+
+
+
+
+
+
+
+
+.foot-upper{display:flex;align-items:flex-start;justify-content:space-between;padding-bottom:24px}
+.foot-upper-l{display:flex;align-items:center;gap:10px}
+.foot-logo-img{width:24px;height:24px;border-radius:6px;object-fit:cover;vertical-align:middle}
+.foot-icons{display:inline-flex;align-items:center;gap:10px;margin-left:14px;position:relative;top:1px}
+.foot-social{color:rgba(248,250,252,0.5);transition:color .2s;text-decoration:none;display:flex;align-items:center}
+.foot-social:hover{color:rgba(248,250,252,0.7)}
+.foot-upper-r{display:flex;gap:32px;align-items:center}
+.foot-upper-r a{color:rgba(248,250,252,0.6);text-decoration:none;font-size:.82rem;font-weight:600;transition:color .2s}
+.foot-upper-r a:hover{color:rgba(248,250,252,0.85)}
+.foot-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.12),rgba(255,255,255,0.12),transparent);margin:0}
+.foot-lower{display:flex;align-items:center;justify-content:space-between;padding:14px 0 10px;font-size:.66rem;color:rgba(248,250,252,0.55)}
+
+
+
+
+
+
+
+.nav::before{content:'';position:absolute;inset:-1px;border-radius:inherit;background:conic-gradient(from var(--navGlint,0deg),transparent 0%,transparent 35%,rgba(200,220,255,0.15) 38%,rgba(255,255,255,0.35) 40%,rgba(255,240,220,0.15) 42%,transparent 45%,transparent 100%);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;padding:2px;pointer-events:none;animation:navGlint 8s linear infinite}
+@keyframes navGlint{0%{--navGlint:0deg}100%{--navGlint:360deg}}
+@property --navGlint{syntax:'<angle>';inherits:false;initial-value:0deg}
+
+.ftab.active::before{content:'';position:absolute;inset:-1px;border-radius:inherit;background:conic-gradient(from var(--tabGlint,0deg),transparent 0%,transparent 35%,rgba(200,220,255,0.12) 38%,rgba(255,255,255,0.28) 40%,rgba(255,240,220,0.12) 42%,transparent 45%,transparent 100%);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;padding:1.5px;pointer-events:none;animation:tabGlint 6s linear infinite;z-index:1}
+@keyframes tabGlint{0%{--tabGlint:0deg}100%{--tabGlint:360deg}}
+@property --tabGlint{syntax:'<angle>';inherits:false;initial-value:0deg}
+.ftab:not(.active):hover{background:radial-gradient(ellipse at center,rgba(255,255,255,0.06) 0%,rgba(255,255,255,0.02) 60%,transparent 100%);border-color:rgba(255,255,255,0.08);cursor:pointer}
+.ftab:not(.active):hover svg{opacity:.7}
+
+@keyframes tabPulse{0%,100%{border-color:rgba(255,255,255,0.06);box-shadow:none}50%{border-color:rgba(255,255,255,0.1);box-shadow:inset 0 0 12px rgba(255,255,255,0.02)}}
+.ftab:not(.active){animation:tabPulse 4s ease-in-out infinite}
+
+.fpanel-desc .gt{display:inline-block;margin-top:6px;font-weight:700;font-size:.95rem;background:linear-gradient(135deg,#E8C547,#F5E6A3);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+.pcard-badge.outline-green{background:transparent;color:#10b981;border:1px solid rgba(16,185,129,0.4)}
+
+.pcard-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:18px;min-height:28px;justify-content:flex-start;margin-left:-2px}.pcard-head .pcard-name{margin-right:auto}
+
+
+
+.price-old-top{font-size:1.2rem;color:rgba(248,250,252,0.5);text-decoration:line-through;font-weight:500;min-height:1.4em;line-height:1.4;margin-bottom:4px}
+
+.btn-bundle{font-size:1rem!important;padding:14px 32px!important}
+
+.pcard.pop .btn-p{color:#0a0a0a;font-weight:700;text-shadow:none}
+@media(max-width:768px){.hero-img-frame{transform:none!important;box-shadow:0 0 12px rgba(184,134,11,0.06),0 4px 16px rgba(0,0,0,0.3)!important}
+.hero-img-frame:hover{box-shadow:0 0 12px rgba(184,134,11,0.06),0 4px 16px rgba(0,0,0,0.3)!important}
+
+.nav{padding:0 20px}.nav-links{display:none}.hamburger{display:flex}.hero{padding:100px 0 0}.hero-desc{margin:0 auto 28px}.hero-visual{padding:0 16px}.features{padding:88px 0}.ftabs{flex-direction:column}.ftab{padding:12px 16px}.fpanel.active{grid-template-columns:1fr;gap:28px}
+.fpanel-info{animation:featSlideUp .5s ease both}
+@keyframes featSlideUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.fpanel-preview{order:-1}.pricing{padding:88px 0}.pgrid{grid-template-columns:1fr;max-width:420px;margin:0 auto}.faq{padding:88px 0}}
+@media(max-width:480px){.nav{padding:0 14px;height:52px;max-width:calc(100% - 24px);top:10px;border-radius:8px}.nav-logo-img{width:36px;height:36px;border-radius:8px;object-fit:cover}
+.nav-logo-text{font-size:.95rem}.mmenu{top:64px}.hero{padding:88px 0 0}.hero h1{font-size:2rem}.hero-desc{font-size:.92rem}.hero-btns{flex-direction:column;align-items:stretch;padding:0 20px}.btn-p,.hero-visual{padding:0 12px}.hero-img-frame{border-radius:8px}.features{padding:64px 0}.ftab-name{font-size:.78rem}.ftab svg{display:none}.fpanel-title{font-size:1.4rem}.sec-title{font-size:1.6rem}.pricing{padding:64px 0}.pgrid{max-width:100%}.pcard{padding:28px 20px}.pop-inner{padding:28px 20px}.pcard .price{font-size:2.6rem}.faq{padding:64px 0}
+.faq-q{padding:18px 0;font-size:.88rem}.faq-a-inner{padding:0 0 18px;font-size:.85rem}/* COMPARISON TABLE */
+.compare{margin-top:64px;border:1px solid rgba(212,168,67,0.12);border-radius:16px;overflow:hidden;backdrop-filter:blur(8px);background:rgba(255,255,255,0.015)}
+.compare-title{padding:24px 28px;font-family:var(--fh);font-size:1.1rem;font-weight:700;border-bottom:1px solid rgba(212,168,67,0.1)}
+.compare table{width:100%;border-collapse:collapse}
+.compare th,.compare td{padding:14px 20px;text-align:center;font-size:.85rem;border-bottom:1px solid rgba(255,255,255,0.04)}
+.compare th{color:var(--text3);font-weight:600;font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;padding-top:18px}
+.compare th.pop-col{color:var(--a5);background:rgba(184,134,11,0.04)}
+.compare td:first-child{text-align:left;color:var(--text2);font-weight:500}
+.compare td.pop-col{background:rgba(184,134,11,0.04)}
+.compare tr:last-child td,.compare tr:last-child th{border-bottom:none}
+.compare .ck-yes{color:#E8C547;font-size:1rem}
+.compare .ck-no{color:rgba(255,255,255,0.12);font-size:1rem}
+.compare .ck-partial{color:rgba(232,197,71,0.5);font-size:.75rem}
+
+.compare{margin-top:48px}.compare th,.compare td{padding:10px 12px;font-size:.75rem}.foot{padding:24px 0 12px
+.foot-upper{flex-direction:column;gap:16px;align-items:center}
+.foot-upper-r{gap:20px}
+.foot-lower{flex-direction:column;gap:6px;text-align:center;align-items:center}
+}.fsocials{justify-content:center}.foot-disc{font-size:.55rem}}
+@media(max-width:360px){.container{padding:0 16px}.hero h1{font-size:1.75rem}.hero-badge{font-size:.7rem;padding:5px 12px}.btn-p,.sec-title{font-size:1.5rem}.pcard .price{font-size:2.3rem}}
+/* LOADER */
+.loader{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px;transition:opacity .6s,visibility .6s}
+.loader.done{opacity:0;visibility:hidden;pointer-events:none}
+.loader-icon{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:var(--grad);font-family:var(--fh);font-weight:800;font-size:1.4rem;color:#fff;box-shadow:0 0 40px rgba(184,134,11,0.5);animation:loaderPulse 1.2s ease-in-out infinite}
+@keyframes loaderPulse{0%,100%{transform:scale(1);box-shadow:0 0 40px rgba(184,134,11,0.5)}50%{transform:scale(1.08);box-shadow:0 0 60px rgba(184,134,11,0.7)}}
+.loader-bar{width:120px;height:3px;border-radius:3px;background:rgba(255,255,255,0.08);overflow:hidden}
+.loader-fill{height:100%;width:0;background:var(--grad);border-radius:3px;animation:loaderFill 1.4s ease-out forwards}
+@keyframes loaderFill{to{width:100%}}
+
+/* CARD FROST TEXTURE */
+.pcard::after,.fpanel-preview::after,.ftab.active::after{content:'';position:absolute;inset:0;border-radius:inherit;opacity:.07;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");background-size:200px 200px;mix-blend-mode:overlay}
+.pcard{position:relative;overflow:hidden}
+.pop-inner{position:relative;overflow:visible!important}
+.pop-inner::after{content:'';position:absolute;inset:0;border-radius:inherit;opacity:.07;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");background-size:200px 200px;mix-blend-mode:overlay}
+
+/* BRUSHED METAL GOLD */
+.btn-p::before{content:'';position:absolute;inset:0;border-radius:inherit;opacity:.18;pointer-events:none;background:repeating-linear-gradient(90deg,transparent,transparent 1px,rgba(255,255,255,0.06) 1px,rgba(255,255,255,0.06) 2px);z-index:1;mix-blend-mode:overlay}
+.hero-badge::before{content:'';position:absolute;inset:0;border-radius:inherit;opacity:.12;pointer-events:none;background:repeating-linear-gradient(105deg,transparent,transparent 3px,rgba(255,255,255,0.04) 3px,rgba(255,255,255,0.04) 4px)}
+.hero-badge{position:relative;overflow:hidden}
+.nav-cta::before{content:'';position:absolute;inset:0;border-radius:inherit;opacity:.15;pointer-events:none;background:repeating-linear-gradient(90deg,transparent,transparent 2px,rgba(255,255,255,0.03) 2px,rgba(255,255,255,0.03) 3px);z-index:1}
+
+/* SCANLINES ON HERO SLIDER */
+.hero-slider::after{content:'';position:absolute;inset:0;z-index:3;pointer-events:none;opacity:.06;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.15) 2px,rgba(0,0,0,0.15) 3px);border-radius:inherit}
+
+/* NOISY SECTION DIVIDERS */
+.gdiv{position:relative;overflow:hidden}
+.gdiv::after{content:'';position:absolute;inset:0;opacity:.15;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 4' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='d'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23d)'/%3E%3C/svg%3E");mix-blend-mode:overlay}
+
+/* TABLE TEXTURE */
+.compare{position:relative;overflow:hidden}
+.compare::after{content:'';position:absolute;inset:0;border-radius:inherit;opacity:.05;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='t'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23t)'/%3E%3C/svg%3E");background-size:200px 200px;mix-blend-mode:overlay}
+
+/* FOOTER TEXTURE */
+.foot{position:relative;overflow:hidden}
+.foot::after{content:'';position:absolute;inset:0;opacity:.05;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='l'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.4' numOctaves='5' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23l)'/%3E%3C/svg%3E");background-size:300px 300px;mix-blend-mode:overlay}
+
+
+/* SECTION TEXTURES - more visible */
+.features,.pricing,.faq,.final-cta{position:relative}
+.features::before,.pricing::before{content:'';position:absolute;inset:0;opacity:.03;pointer-events:none;background-image:radial-gradient(rgba(212,168,67,0.15) 1px,transparent 1px);background-size:24px 24px}
+
+
+/* SHOOTING STARS */
+.shooting-stars{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.shooting-star{position:absolute;width:80px;height:1px;background:linear-gradient(90deg,rgba(212,168,67,0) 0%,rgba(212,168,67,0.6) 100%);border-radius:50%;opacity:0;transform:rotate(35deg);animation:shoot linear infinite}
+.shooting-star::before{content:'';position:absolute;right:0;top:-1px;width:6px;height:3px;border-radius:50%;background:rgba(242,216,94,0.8);box-shadow:0 0 6px rgba(242,216,94,0.5),0 0 12px rgba(212,168,67,0.3)}
+.shooting-star:nth-child(1){top:10%;left:70%;animation-duration:6s;animation-delay:1s;width:70px}
+.shooting-star:nth-child(2){top:25%;left:40%;animation-duration:8s;animation-delay:4s;width:90px}
+.shooting-star:nth-child(3){top:5%;left:85%;animation-duration:7s;animation-delay:7s;width:60px}
+.shooting-star:nth-child(4){top:40%;left:20%;animation-duration:9s;animation-delay:11s;width:80px}
+.shooting-star:nth-child(5){top:15%;left:55%;animation-duration:7.5s;animation-delay:15s;width:65px}
+@keyframes shoot{0%{transform:rotate(35deg) translateX(0);opacity:0}5%{opacity:1}15%{opacity:1}30%{transform:rotate(35deg) translateX(300px);opacity:0}100%{opacity:0}}
+
+/* SLIDER SPINNING BORDER */
+.hero-img-frame::before{content:'';position:absolute;inset:-1px;border-radius:17px;background:conic-gradient(from var(--sAngle,0deg),rgba(184,134,11,0.05),rgba(212,168,67,0.3),rgba(242,216,94,0.5),rgba(212,168,67,0.3),rgba(184,134,11,0.05),rgba(184,134,11,0.02));animation:sliderSpin 14s linear infinite;z-index:-1;pointer-events:none}
+@keyframes sliderSpin{to{--sAngle:360deg}}
+@property --sAngle{syntax:"<angle>";initial-value:0deg;inherits:false}
+
+/* FLOATING */
+.hero-img-frame{animation:heroFloat 8s ease-in-out infinite}
+@keyframes heroFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+
+/* COMPARISON ENHANCEMENTS */
+.compare{border:1px solid rgba(212,168,67,0.15)}
+.compare th:nth-child(3){color:#F2D85E;font-weight:700}
+.compare td:nth-child(3){color:#E8C547}
+.compare td:nth-child(3){background:rgba(212,168,67,0.03)}
+.compare td svg{color:#E8C547}
+.ct-yes{color:#E8C547!important}
+
+.final-cta .btn-p{animation:ctaPulse 2.5s ease-in-out infinite;position:relative;font-size:1.05rem;padding:16px 40px}
+.final-cta .btn-p::after{content:'';position:absolute;inset:-4px;border-radius:inherit;background:conic-gradient(from var(--angle,0deg),transparent 60%,rgba(242,216,94,0.3) 75%,rgba(212,168,67,0.5) 80%,rgba(242,216,94,0.3) 85%,transparent 100%);animation:borderSpin 4s linear infinite;z-index:-1;filter:blur(6px);opacity:.7}
+@keyframes ctaPulse{0%,100%{box-shadow:0 0 20px rgba(184,134,11,0.3),0 0 60px rgba(184,134,11,0.1)}50%{box-shadow:0 0 30px rgba(184,134,11,0.5),0 0 80px rgba(184,134,11,0.2),0 0 120px rgba(184,134,11,0.08)}}
+
+
+.back-to-top{position:fixed;bottom:24px;right:24px;width:40px;height:40px;border-radius:10px;background:linear-gradient(180deg,rgba(255,255,255,0.07) 0%,rgba(255,255,255,0.02) 100%);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.12);border-top:1.5px solid rgba(255,255,255,0.2);color:rgba(248,250,252,0.6);box-shadow:0 4px 16px rgba(0,0,0,0.1),inset 0 1px 0 rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;visibility:hidden;transition:all .3s;z-index:99;backdrop-filter:blur(8px)}
+.back-to-top.visible{opacity:1;visibility:visible}
+.back-to-top:hover{background:linear-gradient(180deg,rgba(255,255,255,0.1) 0%,rgba(255,255,255,0.03) 100%);transform:translateY(-2px);border-color:rgba(255,255,255,0.18);color:rgba(248,250,252,0.8)}
+
+
+
+
+
+/* MOUSE SPARKLES */
+.sparkle{position:fixed;pointer-events:none;z-index:9999;width:4.5px;height:4.5px;border-radius:50%;background:#F2D85E;box-shadow:0 0 7px rgba(242,216,94,0.8),0 0 14px rgba(212,168,67,0.4);animation:sparkleLife .85s ease-out forwards}
+@keyframes sparkleLife{0%{opacity:1;transform:scale(1) translate(0,0)}100%{opacity:0;transform:scale(0) translate(var(--sx),var(--sy))}}
+.hero-slider-nav{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);z-index:5;background:rgba(0,0,0,0.55);backdrop-filter:blur(10px);border-radius:10px;padding:7px 20px 6px;width:auto;min-width:420px}
+.snav-labels{display:flex;gap:0}
+.snav-label{background:none;border:none;cursor:pointer;padding:4px 12px;font-family:var(--fb);font-size:.82rem;font-weight:500;color:rgba(255,255,255,0.35);letter-spacing:.04em;transition:color .3s;white-space:nowrap;flex:1;text-align:center}
+.snav-label.active{color:rgba(242,216,94,0.9);font-weight:600}
+.snav-label:hover{color:rgba(255,255,255,0.7)}
+.snav-track{width:100%;height:3px;background:rgba(255,255,255,0.08);border-radius:1.5px;overflow:hidden;margin-top:6px}
+.snav-fill{height:100%;background:linear-gradient(90deg,rgba(212,168,67,0.6),rgba(242,216,94,0.9));border-radius:1.5px;width:0;transition:none}
+</style>
+</head>
+<body>
+<div class="loader" id="loader"><img src="img/logo.png" alt="" class="loader-icon" style="padding:8px;object-fit:contain"><div class="loader-bar"><div class="loader-fill"></div></div></div>
+<script>setTimeout(function(){var l=document.getElementById('loader');if(l)l.classList.add('done')},2500);</script>
+<div class="bg-stars"></div>
+<div class="shooting-stars"><div class="shooting-star"></div><div class="shooting-star"></div><div class="shooting-star"></div><div class="shooting-star"></div><div class="shooting-star"></div></div>
+<div class="bg-grid"></div>
+<div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div>
+
+<!-- NAV -->
+
+<nav class="nav" id="navbar"><a href="#" class="nav-logo"><img src="img/logo.png" alt="Kim Thank You" class="nav-logo-img"><span class="nav-logo-text">Kim-Thank_You</span></a><ul class="nav-links"><li><a href="#features">Features</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#faq">FAQ</a></li></ul><button class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button></nav>
+<div class="mmenu" id="mm"><a href="#features" onclick="closeMenu()">Features</a><a href="#pricing" onclick="closeMenu()">Pricing</a><a href="#faq" onclick="closeMenu()">FAQ</a></div>
+
+<!-- HERO -->
+<section class="hero"><div class="hero-glow"></div><div class="container">
+<div class="hero-content">
+<div class="hero-badge fi"><span class="dot"></span> Premium TradingView Indicators</div>
+<h1 class="fi d1">Trade Smarter,<br><span class="gt">Not Harder</span></h1>
+<div class="hero-divider fi d1" style="width:60px;height:2px;background:var(--grad);margin:0 auto 24px;border-radius:2px;box-shadow:0 0 12px rgba(212,168,67,0.4)"></div>
+<p class="hero-desc fi d2">Three indicators that work harder, so you don&#39;t have to.<br>ICT, Harmonic Patterns, and Chart Analysis<br>Automated, precise, in one place.</p>
+<div class="hero-btns fi d3">
+<a href="#pricing" class="btn-p">Get Access <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+
+</div>
+</div>
+<!-- Image Slider -->
+<div class="hero-visual fi d4">
+<div class="hero-img-frame">
+<div class="hero-titlebar"><div class="hero-dots"><span class="rd"></span><span class="yw"></span><span class="gn"></span></div></div>
+<div class="hero-slider" id="heroSlider">
+<img class="hero-slide active" src="img/hero-ict.png" alt="ICT Ultimate Indicator - Order Blocks, FVG, Market Structure on TradingView">
+<img class="hero-slide" src="img/hero-hp.png" alt="Harmonic Patterns Ultimate - Gartley, Bat, Butterfly, Crab Detection">
+<img class="hero-slide" src="img/hero-ca.png" alt="Chart Analysis Ultimate - Trendlines, Channels, RSI Scanner, Similar Patterns">
+</div>
+<div class="hero-slider-nav" id="heroDots">
+<div class="snav-labels">
+<button class="snav-label active" onclick="goSlide(0)">ICT Ultimate</button>
+<button class="snav-label" onclick="goSlide(1)">HP Ultimate</button>
+<button class="snav-label" onclick="goSlide(2)">CA Ultimate</button>
+</div>
+<div class="snav-track"><div class="snav-fill" id="snavFill"></div></div>
+</div>
+<div class="hero-img-glow"></div>
+</div>
+
+</div>
+</div></section>
+
+<!-- FEATURES (Tab-based) -->
+<section class="features" id="features"><div class="container"><div class="sec-hd"><div class="sec-badge fi">Our Indicators</div><h2 class="sec-title fi d1">The Only Three <span class="gt">You Need.</span></h2><p class="sec-sub fi d2">One reads smart money. One detects patterns.<br>One analyzes everything else.</p></div>
+<div class="ftabs fi d3"><button class="ftab active" onclick="switchTab(0)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 4v2H3V7l9-4z"/><line x1="5" y1="9" x2="5" y2="19"/><line x1="9" y1="9" x2="9" y2="19"/><line x1="15" y1="9" x2="15" y2="19"/><line x1="19" y1="9" x2="19" y2="19"/><path d="M3 19h18v2H3z" fill="currentColor" opacity=".2"/></svg><span class="ftab-name">ICT Ultimate</span></button><button class="ftab" onclick="switchTab(1)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 16l5-10 4 6 5-8 4 12"/><circle cx="3" cy="16" r="1.2" fill="currentColor"/><circle cx="8" cy="6" r="1.2" fill="currentColor"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/><circle cx="17" cy="4" r="1.2" fill="currentColor"/><circle cx="21" cy="16" r="1.2" fill="currentColor"/></svg><span class="ftab-name">Harmonic Patterns Ultimate</span></button><button class="ftab" onclick="switchTab(2)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7"/><path d="M15 15l5.5 5.5"/><path d="M6 12l2-3 2.5 2 3-4" stroke-width="1.5"/></svg><span class="ftab-name">Chart Analysis Ultimate</span></button></div>
+<div class="fpanels fi d4">
+<div class="fpanel active" id="fp0"><div class="fpanel-info"><div class="fpanel-tag">Smart Money Concepts</div><h3 class="fpanel-title">ICT Ultimate</h3><p class="fpanel-desc">Smart money leaves footprints.<br>12 features to read every one &mdash; from Order Blocks to Kill Zones.<br><span class="gt">One click to set up.</span></p><div class="fpanel-feats"><div class="fpanel-feat"><span class="ff-dot"></span>Order Blocks &amp; Breaker Blocks</div><div class="fpanel-feat"><span class="ff-dot"></span>Supply &amp; Demand</div><div class="fpanel-feat"><span class="ff-dot"></span>Fair Value Gaps (FVG)</div><div class="fpanel-feat"><span class="ff-dot"></span>Balanced Price Range (BPR)</div><div class="fpanel-feat"><span class="ff-dot"></span>Liquidity Zones &amp; Sweeps</div><div class="fpanel-feat"><span class="ff-dot"></span>Rejection Blocks</div><div class="fpanel-feat"><span class="ff-dot"></span>Market Structure</div><div class="fpanel-feat"><span class="ff-dot"></span>Trend Candles</div><div class="fpanel-feat"><span class="ff-dot"></span>Premium / Discount &amp; OTE</div><div class="fpanel-feat"><span class="ff-dot"></span>Kill Zones &amp; Sessions</div></div><a href="#pricing" class="btn-p" style="margin-top:28px;align-self:flex-start">Get Access <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div><div class="fpanel-preview"><div class="fpanel-img" style="background:#080808;padding:0"><img src="img/feat-ict.png" alt="ICT Ultimate Preview" style="width:100%;height:100%;object-fit:cover;border-radius:16px"></div></div></div>
+<div class="fpanel" id="fp1"><div class="fpanel-info"><div class="fpanel-tag">Harmonic Trading</div><h3 class="fpanel-title">Harmonic Patterns Ultimate</h3><p class="fpanel-desc">Real harmonic trading experience, engineered into code.<br>8 patterns &mdash; auto-detected, pre-predicted, filtered.<br><span class="gt">You just trade.</span></p><div class="fpanel-feats"><div class="fpanel-feat"><span class="ff-dot"></span>Confirmed &amp; Predicted Patterns</div><div class="fpanel-feat"><span class="ff-dot"></span>High-Confidence Filter</div><div class="fpanel-feat"><span class="ff-dot"></span>Automatic TP/SL System</div><div class="fpanel-feat"><span class="ff-dot"></span>Gartley</div><div class="fpanel-feat"><span class="ff-dot"></span>Bat &amp; Alternate Bat</div><div class="fpanel-feat"><span class="ff-dot"></span>Butterfly</div><div class="fpanel-feat"><span class="ff-dot"></span>Crab &amp; Deep Crab</div><div class="fpanel-feat"><span class="ff-dot"></span>Shark</div><div class="fpanel-feat"><span class="ff-dot"></span>Cypher</div></div><a href="#pricing" class="btn-p" style="margin-top:28px;align-self:flex-start">Get Access <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div><div class="fpanel-preview"><div class="fpanel-img" style="background:#080808;padding:0"><img src="img/feat-hp.png" alt="Harmonic Patterns Ultimate Preview" style="width:100%;height:100%;object-fit:cover;border-radius:16px"></div></div></div>
+<div class="fpanel" id="fp2"><div class="fpanel-info"><div class="fpanel-tag">Complete Chart Analysis</div><h3 class="fpanel-title">Chart Analysis Ultimate</h3><p class="fpanel-desc">11 analysis tools. One indicator.<br>From trendlines to volume profiles &mdash; organized into three presets.<br><span class="gt">Ready to go.</span></p><div class="fpanel-feats"><div class="fpanel-feat"><span class="ff-dot"></span>Support &amp; Resistance</div><div class="fpanel-feat"><span class="ff-dot"></span>Trendlines</div><div class="fpanel-feat"><span class="ff-dot"></span>Parallel Channel</div><div class="fpanel-feat"><span class="ff-dot"></span>Fibonacci Retracement</div><div class="fpanel-feat"><span class="ff-dot"></span>Chart Pattern: Wedge</div><div class="fpanel-feat"><span class="ff-dot"></span>Chart Pattern: Triangle &amp; Expanding</div><div class="fpanel-feat"><span class="ff-dot"></span>AB=CD Pattern</div><div class="fpanel-feat"><span class="ff-dot"></span>Similar Pattern Finder</div><div class="fpanel-feat"><span class="ff-dot"></span>Session Volume Profile</div><div class="fpanel-feat"><span class="ff-dot"></span>Divergence Detector</div><div class="fpanel-feat"><span class="ff-dot"></span>RSI Scanner</div></div><a href="#pricing" class="btn-p" style="margin-top:28px;align-self:flex-start">Get Access <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div><div class="fpanel-preview"><div class="fpanel-img" style="background:#080808;padding:0"><img src="img/feat-ca.png" alt="Chart Analysis Ultimate Preview" style="width:100%;height:100%;object-fit:cover;border-radius:16px"></div></div></div>
+</div></div></section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing"><div class="pricing-glow"></div><div class="container"><div class="sec-hd"><div class="sec-badge fi">Pricing</div><h2 class="sec-title fi d1">Pick Your <span class="gt">Edge.</span></h2><p class="sec-sub fi d2">Start with one, or get them all.<br>Cancel anytime.</p></div>
+<div class="guarantee fi d3"><div class="guarantee-badge"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" style="flex-shrink:0"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.2"/><path d="M5 8l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Safe &amp; secure checkout &middot; Cancel anytime</div></div>
+<div class="pgrid">
+<!-- Single -->
+<div class="pcard fi d1"><div class="glow-spot"></div><div class="pcard-head"><span class="pcard-name">Single Indicator</span><span class="pcard-badge outline-green">SAVE 20%</span></div><div class="price-old-top">$25/monthly</div><div class="price">$20 <span>/monthly</span></div><p class="pdesc">Start with one indicator. Upgrade anytime.</p><div class="gdiv" style="margin-bottom:20px"></div><ul class="pfeats"><li><span class="ck"><svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 4.5-5" stroke="#E8C547" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Choose one indicator</li><li><span class="ck"><svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 4.5-5" stroke="#E8C547" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>All future updates</li><li><span class="ck"><svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 4.5-5" stroke="#E8C547" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Telegram community</li><li><span class="ck"><svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 4.5-5" stroke="#E8C547" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Setup guide included</li></ul><a href="#" class="btn-p">Get Access</a></div>
+<!-- Bundle (Popular) — spinning gradient border -->
+<div class="pcard pop fi d2"><div class="pop-inner"><div class="pcard-head"><span class="pcard-name">Bundle</span><span class="pcard-badge outline-green">SAVE 40%</span><span class="pcard-badge popular">Most Popular</span></div><div class="price-old-top">$49/monthly</div><div class="price">$29 <span>/monthly</span></div><p class="pdesc">All 3 indicators at the price of two. The full edge.</p><div class="gdiv" style="margin-bottom:20px"></div><ul class="pfeats"><li><span class="ck"><svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 4.5-5" stroke="#E8C547" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>All 3 premium indicators</li><li><span class="ck"><svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 4.5-5" stroke="#E8C547" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>All future updates</li><li><span class="ck"><svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 4.5-5" stroke="#E8C547" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Telegram community</li><li><span class="ck"><svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 4.5-5" stroke="#E8C547" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Exclusive setup guide</li></ul><a href="#" class="btn-p btn-bundle">Get Access</a></div></div>
+<!-- Annual -->
+<div class="pcard fi d3"><div class="glow-spot"></div><div class="pcard-head"><span class="pcard-name">Annual</span><span class="pcard-badge outline-green">SAVE 50%</span></div><div class="price-old-top">$588/yearly</div><div class="price">$290 <span>/yearly</span></div><p class="pdesc">All 3 indicators, billed yearly. Save the most.</p><div class="gdiv" style="margin-bottom:20px"></div><ul class="pfeats"><li><span class="ck"><svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 4.5-5" stroke="#E8C547" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>All 3 indicators</li><li><span class="ck"><svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 4.5-5" stroke="#E8C547" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>All future updates</li><li><span class="ck"><svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 4.5-5" stroke="#E8C547" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Telegram community</li><li><span class="ck"><svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 4.5-5" stroke="#E8C547" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Early access to new tools</li></ul><a href="#" class="btn-p">Get Access</a></div>
+</div>
+
+<div class="compare fi d4">
+<div class="compare-title">What's in each plan</div>
+<table>
+<thead><tr><th style="text-align:left">Feature</th><th>Single</th><th class="pop-col">Bundle</th><th>Annual</th></tr></thead>
+<tbody>
+<tr><td>ICT Ultimate</td><td><span class="ck-partial">1 of 3</span></td><td class="pop-col"><span class="ck-yes">&#10003;</span></td><td><span class="ck-yes">&#10003;</span></td></tr>
+<tr><td>Harmonic Patterns Ultimate</td><td><span class="ck-partial">1 of 3</span></td><td class="pop-col"><span class="ck-yes">&#10003;</span></td><td><span class="ck-yes">&#10003;</span></td></tr>
+<tr><td>Chart Analysis Ultimate</td><td><span class="ck-partial">1 of 3</span></td><td class="pop-col"><span class="ck-yes">&#10003;</span></td><td><span class="ck-yes">&#10003;</span></td></tr>
+<tr><td>All future updates</td><td><span class="ck-yes">&#10003;</span></td><td class="pop-col"><span class="ck-yes">&#10003;</span></td><td><span class="ck-yes">&#10003;</span></td></tr>
+<tr><td>Telegram community</td><td><span class="ck-yes">&#10003;</span></td><td class="pop-col"><span class="ck-yes">&#10003;</span></td><td><span class="ck-yes">&#10003;</span></td></tr>
+<tr><td>Early access to new tools</td><td><span class="ck-no">&mdash;</span></td><td class="pop-col"><span class="ck-yes">&#10003;</span></td><td><span class="ck-yes">&#10003;</span></td></tr>
+<tr><td>Yearly discount</td><td><span class="ck-no">&mdash;</span></td><td class="pop-col"><span class="ck-no">&mdash;</span></td><td><span class="ck-yes">&#10003;</span></td></tr>
+</tbody></table>
+</div>
+</div></section>
+
+<!-- FAQ -->
+<section class="faq" id="faq"><div class="container"><div class="sec-hd"><div class="sec-badge fi">FAQ</div><h2 class="sec-title fi d1">Frequently Asked <span class="gt">Questions</span></h2><p class="sec-sub fi d2">Everything you need to know before getting started.</p></div>
+<div class="faq-list">
+<div class="faq-i fi"><button class="faq-q" onclick="toggleFaq(this)">What platform do these indicators work on?<span class="ic"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span></button><div class="faq-a"><div class="faq-a-inner">All three run on TradingView &mdash; crypto, forex, stocks, commodities, any market and timeframe available on the platform.</div></div></div>
+<div class="faq-i fi d1"><button class="faq-q" onclick="toggleFaq(this)">How do I get access after purchase?<span class="ic"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span></button><div class="faq-a"><div class="faq-a-inner">After subscribing, your TradingView username will be added within 24 hours. The indicators will appear in your Invite-Only Scripts tab. For setup help or questions, reach out via <a href="https://t.me/Kim_Thank_You_Bot" target="_blank" style="color:#E8C547;text-decoration:underline">Telegram</a>.</div></div></div>
+<div class="faq-i fi d2"><button class="faq-q" onclick="toggleFaq(this)">Do I need to adjust settings myself?<span class="ic"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span></button><div class="faq-a"><div class="faq-a-inner">ICT Ultimate and Chart Analysis Ultimate include preset systems &mdash; just select a preset and start. Harmonic Patterns Ultimate works out of the box with no setup needed.</div></div></div>
+<div class="faq-i fi d3"><button class="faq-q" onclick="toggleFaq(this)">Do you offer refunds?<span class="ic"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span></button><div class="faq-a"><div class="faq-a-inner">Due to the digital nature of our products, we do not offer refunds once TradingView access has been granted. Please review the features carefully before purchasing.</div></div></div>
+<div class="faq-i fi d4"><button class="faq-q" onclick="toggleFaq(this)">Can I cancel my subscription at any time?<span class="ic"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span></button><div class="faq-a"><div class="faq-a-inner">Yes. You can cancel anytime from your payment dashboard. No hidden steps &mdash; your access continues until the end of the billing period.</div></div></div>
+<div class="faq-i fi d4"><button class="faq-q" onclick="toggleFaq(this)">Can I win every trade using this?<span class="ic"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span></button><div class="faq-a"><div class="faq-a-inner">No indicator guarantees profits. These are analysis tools that help you make better decisions &mdash; not signal services. All trading involves risk, and past performance does not guarantee future results.</div></div></div>
+</div></div></section>
+
+
+<!-- FINAL CTA -->
+<section class="final-cta"><div class="final-cta-bg"></div><div class="final-cta-glow"></div><div class="container" style="position:relative;z-index:1">
+<div class="sec-badge fi">Get Started</div>
+<h2 class="fi d1">Ready to Trade <span class="gt">Smarter?</span></h2>
+<p class="fi d2">Three indicators. One toolkit. Start now.</p>
+<div class="fi d3" style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+<a href="#pricing" class="btn-p">Get Access Now <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+</div>
+</div></section>
+
+<!-- FOOTER -->
+<footer class="foot"><div class="container">
+<div class="foot-upper">
+<div class="foot-upper-l">
+<img src="img/logo.png" alt="Kim Thank You" class="foot-logo-img">
+<span class="foot-logo-text">Kim-Thank_You</span>
+<div class="foot-icons">
+<a href="#" title="YouTube" class="foot-social"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+<a href="#" title="TradingView" class="foot-social"><svg width="16" height="16" viewBox="0 0 36 28" fill="currentColor"><path d="M14 22H7V6h7v16zM21 22h-4V2h4v20zM28 22h-4v-8h4v8zM0 22h4V10H0v12z"/></svg></a>
+</div>
+</div>
+<div class="foot-upper-r">
+<a href="#features">Features</a>
+<a href="#pricing">Pricing</a>
+<a href="#faq">FAQ</a>
+</div>
+</div>
+<div class="foot-divider"></div>
+<div class="foot-lower">
+<span>Kim-Thank_You &copy; 2026 All rights reserved.</span>
+<span>Disclaimer</span>
+</div>
+<div class="foot-disc">Trading involves substantial risk and is not appropriate for everyone. Only risk capital should be used. Nothing on this website constitutes investment, financial, legal, or tax advice. Past performance does not guarantee future results. All trading decisions are at your own risk.</div>
+</div></footer>
+
+<script>
+// Loader
+window.addEventListener('DOMContentLoaded',function(){setTimeout(function(){document.getElementById('loader').classList.add('done')},1600)});setTimeout(function(){var l=document.getElementById('loader');if(l)l.classList.add('done')},3000);
+// Scroll animations
+var obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('vis')})},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.fi').forEach(function(el){obs.observe(el)});
+// Navbar scroll
+window.addEventListener('scroll',function(){document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>20)});
+// FAQ
+function toggleFaq(b){var i=b.parentElement,a=i.querySelector('.faq-a');if(i.classList.contains('active')){i.classList.remove('active');a.style.maxHeight=null}else{i.classList.add('active');a.style.maxHeight=a.scrollHeight+'px'}}
+// Mobile menu
+function toggleMenu(){document.getElementById('mm').classList.toggle('open')}
+function closeMenu(){document.getElementById('mm').classList.remove('open')}
+// Feature tabs
+function switchTab(n){document.querySelectorAll('.ftab').forEach(function(t,i){t.classList.toggle('active',i===n)});document.querySelectorAll('.fpanel').forEach(function(p,i){p.classList.toggle('active',i===n)})}
+// Hero slider
+var si=0,slides=document.querySelectorAll('.hero-slide'),labels=document.querySelectorAll('.snav-label'),fill=document.getElementById('snavFill'),total=slides.length,dur=4000,startT=Date.now();
+function goSlide(n){slides[si].classList.remove('active');labels[si].classList.remove('active');si=n;slides[si].classList.add('active');labels[si].classList.add('active');startT=Date.now()}
+function tickBar(){var elapsed=Date.now()-startT;var seg=elapsed/dur;if(seg>=1){goSlide((si+1)%total);seg=0}var pct=((si+seg)/total)*100;fill.style.width=pct+'%';requestAnimationFrame(tickBar)}
+requestAnimationFrame(tickBar);
+setInterval(function(){goSlide((si+1)%total)},dur);
+
+// Card glow follow
+document.querySelectorAll('.pcard:not(.pop)').forEach(function(card){var spot=card.querySelector('.glow-spot');if(!spot)return;card.addEventListener('mousemove',function(e){var r=card.getBoundingClientRect();spot.style.left=(e.clientX-r.left)+'px';spot.style.top=(e.clientY-r.top)+'px'})});
+
+// Back to top
+window.addEventListener('scroll',function(){var b=document.getElementById('backToTop');if(b)b.classList.toggle('visible',window.scrollY>600)});
+
+// Mouse sparkles
+(function(){var last=0;document.addEventListener('mousemove',function(e){var now=Date.now();if(now-last<50)return;last=now;var s=document.createElement('div');s.className='sparkle';s.style.left=e.clientX+'px';s.style.top=e.clientY+'px';s.style.setProperty('--sx',(Math.random()*30-15)+'px');s.style.setProperty('--sy',(Math.random()*30-15)+'px');s.style.width=s.style.height=(2.5+Math.random()*3.5)+'px';document.body.appendChild(s);setTimeout(function(){s.remove()},800)})})();
+
+
+
+</script>
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg></button>
+</body>
+</html>
