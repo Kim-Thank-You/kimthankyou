@@ -348,6 +348,14 @@ section{position:relative;z-index:1}
 .foot-upper-r{gap:20px}
 .foot-logo-text{white-space:nowrap}
 .foot-lower{flex-direction:column;gap:6px;text-align:center}
+/* SLIDER MOBILE FIXES */
+.hero-img-frame::before{display:none!important}
+.hero-img-frame{border-radius:10px!important;border:1px solid rgba(212,168,67,0.2)!important}
+.hero-slider-nav{position:relative;bottom:auto;left:auto;transform:none;width:100%;border-radius:0 0 10px 10px;padding:6px 12px 5px;min-width:auto;background:rgba(0,0,0,0.7)}
+.snav-label{font-size:.65rem;padding:2px 4px;letter-spacing:0}
+.snav-track{margin-top:3px;height:2px}
+.hero-titlebar{display:none}
+
 }
 @media(max-width:480px){.nav{padding:0 14px;height:52px;max-width:calc(100% - 24px);top:10px;border-radius:8px}.nav-logo-img{width:36px;height:36px;border-radius:8px;object-fit:cover}
 .nav-logo-text{font-size:.95rem}.mmenu{top:64px}.hero{padding:88px 0 0}.hero h1{font-size:2rem}.hero-desc{font-size:.92rem}.hero-btns{flex-direction:column;align-items:stretch;padding:0 20px}.btn-p,.hero-visual{padding:0 12px}.hero-img-frame{border-radius:8px}.features{padding:64px 0}.ftab-name{font-size:.78rem}.ftab svg{display:none}.fpanel-title{font-size:1.4rem}.sec-title{font-size:1.6rem}.pricing{padding:64px 0}.pgrid{max-width:100%}.pcard{padding:28px 20px}.pop-inner{padding:28px 20px}.pcard .price{font-size:2.6rem}.faq{padding:64px 0}
