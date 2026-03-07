@@ -701,7 +701,6 @@ var si=0,slides=document.querySelectorAll('.hero-slide'),labels=document.querySe
 function goSlide(n){slides[si].classList.remove('active');labels[si].classList.remove('active');si=n;slides[si].classList.add('active');labels[si].classList.add('active');startT=Date.now()}
 function tickBar(){var elapsed=Date.now()-startT;var seg=elapsed/dur;if(seg>=1){goSlide((si+1)%total);seg=0}var pct=((si+seg)/total)*100;fill.style.width=pct+'%';requestAnimationFrame(tickBar)}
 requestAnimationFrame(tickBar);
-setInterval(function(){goSlide((si+1)%total)},dur);
 
 // Card glow follow
 document.querySelectorAll('.pcard:not(.pop)').forEach(function(card){var spot=card.querySelector('.glow-spot');if(!spot)return;card.addEventListener('mousemove',function(e){var r=card.getBoundingClientRect();spot.style.left=(e.clientX-r.left)+'px';spot.style.top=(e.clientY-r.top)+'px'})});
